@@ -18,7 +18,6 @@ export default function PuginationContainer({ pages, setUrl, maxPages }) {
   const index = useRef();
 
   function handleClick() {
-    console.log(index.current.value);
     if (index.current.value < 1 || index.current.value > maxPages) return;
     const url = new URL(window.location.href);
     const search = url.searchParams;

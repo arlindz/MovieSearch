@@ -37,7 +37,6 @@ export default function Main() {
       ? ""
       : "&query=" + searchParams.get("query");
   const currentUrl = u.href + query;
-  console.log(currentUrl);
   const genres =
     "https://api.themoviedb.org/3/genre/movie/list?api_key=00e98fcc934090f14015fd76e2cf801b";
   async function getData(url) {
@@ -58,7 +57,6 @@ export default function Main() {
 
   async function setComponents(url) {
     const data = await getData(url);
-    console.log(data);
     setData(data);
     setMaxPages(Math.min(data.total_pages, 500));
   }
