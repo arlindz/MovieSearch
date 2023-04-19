@@ -1,0 +1,78 @@
+.bottom-container {
+  margin-top: 30px;
+  width: 90%;
+  height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.search-index {
+  border-radius: 5px;
+  width: 90px;
+  height: 40px;
+  font-size: 16px;
+  align-self: center;
+}
+.search-index-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pugination-container {
+  width: auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.pugination-container a {
+  width: 60px;
+  display: flex;
+  justify-content: center;
+}
+.pugination {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #cae962;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all ease-in-out 0.2s;
+}
+.pugination:hover {
+  transform: translateY(-10%);
+  background-color: #d5f375;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.8);
+}
+.pugination p {
+  font-size: 14px;
+  color: black;
+}
+a {
+  text-decoration: none;
+}
+@media all and (max-width: 480px) {
+  .bottom-container {
+    margin-top: 10px;
+  }
+  .pugination-container {
+    width: 300px;
+  }
+  .bottom-container {
+    grid-template-columns: 300px 160px;
+  }
+  .pugination-container a {
+    height: 25px;
+  }
+  .pugination {
+    width: 25px;
+    height: 25px;
+  }
+  .pugination p {
+    font-size: 8px;
+  }
+}
