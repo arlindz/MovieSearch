@@ -4,34 +4,6 @@ import "./movie.css";
 import ProgressiveImage from "./ProgressiveImage";
 import imageURL from "./imageURL";
 export default function Movie() {
-  const [loaded, setLoaded] = useState(document.images.length === 0);
-  useEffect(() => {
-    const images = Array.from(document.images);
-    let loadedImages = 0;
-
-    console.log("images length" + images.length);
-    const handleImageLoad = () => {
-      loadedImages++;
-      console.log("loaded images: " + loadedImages);
-      if (loadedImages === images.length) {
-        setLoaded(true);
-      }
-    };
-    if (images.length === 0) setLoaded(true);
-    images.forEach((image) => {
-      if (image.complete) {
-        handleImageLoad();
-      } else {
-        image.addEventListener('load', handleImageLoad);
-      }
-    });
-
-    return () => {
-      images.forEach((image) => {
-        image.removeEventListener('load', handleImageLoad);
-      });
-    };
-  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
