@@ -27,13 +27,13 @@ export default function MovieCard({ props, genres }) {
     setImageLoaded(true);
   }
   const fullImage = props.poster_path === undefined || props.poster_path === null ? "./default_movie_picture.png" :
-    imageURL(props.poster_path, 780);
+    imageURL(props.poster_path, 1280);
   const blurredImage = props.poster_path === undefined || props.poster_path === null ? "./default_movie_picture.png" :
     imageURL(props.poster_path, 200);
   return (
     <div className="container">
       <div style={imageLoaded ? {} : { height: "300px" }} className="image-container">
-        <ProgressiveImage setImage={setImage} fullImg={fullImage} blurredImg={blurredImage} class_name="movie-recommendation-image" />
+        <ProgressiveImage setImage={setImage} fullImg={fullImage} blurredImg={blurredImage} class_name="image" />
         {averageExists && <div className="rating">
           <p>
             {avg}/10({props.vote_count})

@@ -149,6 +149,7 @@ export default function Movie() {
             </div>
           </div>
         )}
+
         {recommendExists ? (
           <div className="movie-recommendations-container">
             <h3>You may also like</h3>
@@ -158,7 +159,7 @@ export default function Movie() {
                   return (
                     <a href={"/movies/" + item.id}>
                       <div className="movie-recommendation">
-                        <ProgressiveImage class_name={"movie-recommendation-image"} fullImg={imageURL(item.poster_path, 500)} blurredImg={imageURL(item.poster_path, 200)} />
+                        <ProgressiveImage setImage={() => { }} class_name={"movie-recommendation-image"} fullImg={imageURL(item.poster_path, 1280)} blurredImg={imageURL(item.poster_path, 200)} />
 
                         <div className="darkener">
                           {" "}
