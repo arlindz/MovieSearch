@@ -1,7 +1,37 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./movie.css";
+import ProgressiveImage from "./ProgressiveImage";
+import imageURL from "./imageURL";
 export default function Movie() {
+  const [loaded, setLoaded] = useState(document.images.length === 0);
+  useEffect(() => {
+    const images = Array.from(document.images);
+    let loadedImages = 0;
+
+    console.log("images length" + images.length);
+    const handleImageLoad = () => {
+      loadedImages++;
+      console.log("loaded images: " + loadedImages);
+      if (loadedImages === images.length) {
+        setLoaded(true);
+      }
+    };
+    if (images.length === 0) setLoaded(true);
+    images.forEach((image) => {
+      if (image.complete) {
+        handleImageLoad();
+      } else {
+        image.addEventListener('load', handleImageLoad);
+      }
+    });
+
+    return () => {
+      images.forEach((image) => {
+        image.removeEventListener('load', handleImageLoad);
+      });
+    };
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -21,6 +51,7 @@ export default function Movie() {
       opacity: clicked ? "1" : "0"
     }
   ];
+
   const [image, setImage] = useState("");
   const [reviewIndex, setReviewIndex] = useState(0);
   const genresURL =
@@ -155,15 +186,7 @@ export default function Movie() {
                   return (
                     <a href={"/movies/" + item.id}>
                       <div className="movie-recommendation">
-                        <img
-                          className="movie-recommendation-image"
-                          src={
-                            "https://image.tmdb.org/t/p/w300/" +
-                            item.poster_path +
-                            "?api_key=00e98fcc934090f14015fd76e2cf801b"
-                          }
-                          alt=""
-                        />
+                        <ProgressiveImage class_name={"movie-recommendation-image"} fullImg={imageURL(item.poster_path, 500)} blurredImg={imageURL(item.poster_path, 200)} />
 
                         <div className="darkener">
                           {" "}

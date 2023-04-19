@@ -1,41 +1,50 @@
 import "./styles.css";
 import "./movieCard.css";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import ProgressiveImage from "./ProgressiveImage";
+import imageURL from "./imageURL";
 export default function MovieCard({ props, genres }) {
-  const avg =
+  console.log("props at " + props.title);
+  console.log(props);
+  const averageExists = props.vote_average !== undefined;
+  const genreExists = props.genre_ids !== undefined;
+  const avg = averageExists ?
     props.vote_average.toFixed(2) - props.vote_average.toFixed(1) === 0
       ? props.vote_average.toFixed(1)
-      : props.vote_average.toFixed(2);
-  const genreElements = props.genre_ids.map((item) => {
-    return (
-      <div className="genre-box">
-        <p>{genres[item]}</p>
-      </div>
-    );
-  });
-  const image =
-    "https://image.tmdb.org/t/p/w500/" +
-    props.poster_path +
-    "?api_key=00e98fcc934090f14015fd76e2cf801b";
+      : props.vote_average.toFixed(2) : "";
+  let genreElements = []
+  if (genreExists)
+    genreElements = props.genre_ids.map((item) => {
+      if (genres[item] !== undefined)
+        return (
+          <div className="genre-box">
+            <p>{genres[item]}</p>
+          </div>
+        );
+    });
+  const fullImage = props.poster_path === undefined || props.poster_path === null ? "./default_movie_picture.png" :
+    imageURL(props.poster_path, 780);
+  const blurredImage = props.poster_path === undefined || props.poster_path === null ? "./default_movie_picture.png" :
+    imageURL(props.poster_path, 200);
   return (
     <div className="container">
       <div className="image-container">
-        <img className="image" src={image} alt="arlind" />
-        <div className="rating">
+        <ProgressiveImage class_name="image" fullImg={fullImage} blurredImg={blurredImage} />
+
+        {averageExists && <div className="rating">
           <p>
             {avg}/10({props.vote_count})
           </p>
-        </div>
-        <div id="right" className="rating">
+        </div>}
+        {props.release_date !== undefined && <div id="right" className="rating">
           <p>{props.release_date}</p>
-        </div>
+        </div>}
       </div>
       <div className="information-container">
         <div className="title-container">
           <h4>
             <Link className="link" to={"/movies/" + props.id}>
-              {props.title}{" "}
+              {props.title === null || props.title === undefined ? "No title available." : props.title}{" "}
             </Link>
           </h4>
         </div>
