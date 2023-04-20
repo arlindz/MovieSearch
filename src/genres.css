@@ -47,10 +47,11 @@
     background-color: rgb(84, 110, 43);
 }
 .genre-filter-button:hover p{
-    border-radius:5px;
-    background-color: rgb(84, 110, 43);
+   color: white;
+   font-size: 14px;
 }
 .genre-filter-button p {
     font-size: 12px;
+    transition: all ease-in-out 0.2s;
 }
 

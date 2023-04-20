@@ -12,6 +12,7 @@ export default function Main() {
   const page = searchParams.get("page");
   const priority = searchParams.get("priority");
   const genreIds = searchParams.get("genres");
+  const [fetched, setFetched] = useState(false);
   const [data, setData] = useState({ total_pages: 0, results: [], genreIds: {} });
   const [maxPages, setMaxPages] = useState(data.total_pages);
   const puginations = { 0: null, 1: null, 2: null, 3: null };
@@ -35,11 +36,8 @@ export default function Main() {
     sP.set("query", searchParams.get("query"));
   if (genreIds)
     sP.set("with_genres", genreIds);
-  console.log("genreIds length is " + genreIds.length)
   u.search = sP.toString();
   const currentUrl = u.href;
-  console.log("currentURL is");
-  console.log(currentUrl);
   const movieGenres =
     "https://api.themoviedb.org/3/genre/movie/list?api_key=00e98fcc934090f14015fd76e2cf801b";
   const tvGenres = "https://api.themoviedb.org/3/genre/tv/list?api_key=00e98fcc934090f14015fd76e2cf801b&language=en-US";
@@ -67,6 +65,7 @@ export default function Main() {
     const data = await getData(url);
     setData(data);
     setMaxPages(Math.min(data.total_pages, 500));
+    setFetched(true);
   }
   useEffect(() => {
     setComponents(currentUrl);
@@ -75,7 +74,7 @@ export default function Main() {
     <div className="App">
       <div className="container-all">
         <Navbar genres={data.genreIds} />
-        <MainContainer props={data} />
+        {fetched && data.results.length === 0 ? <h2>No results...</h2> : <MainContainer props={data} />}
         <PuginationContainer
           currentUrl={currentUrl}
           pages={puginations}
