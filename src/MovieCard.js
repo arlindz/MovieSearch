@@ -44,13 +44,15 @@ export default function MovieCard({ props, genres }) {
         </div>}
       </div>
       <div className="information-container">
-        <div className="title-container">
+        <Link className="title-container" to={"/movies/" + props.id}>
           <h4>
-            <Link className="link" to={"/movies/" + props.id}>
-              {props.title === null || props.title === undefined ? "No title available." : props.title}{" "}
-            </Link>
+            {props.title === null || props.title === undefined ? "No title available." : props.title}{" "}
           </h4>
-        </div>
+          <div className="title-box title-box-1">
+          </div>
+          <div className="title-box title-box-2">
+          </div>
+        </Link>
         <div className="genre-information">{genreElements}</div>
       </div>
     </div>

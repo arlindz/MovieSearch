@@ -1,6 +1,7 @@
 import "./navbar.css";
 import { useRef } from "react";
-export default function Navbar({ setQuery }) {
+import Genres from "./Genres";
+export default function Navbar({ genres }) {
   const query = useRef();
   function handleClick() {
     const q =
@@ -10,6 +11,7 @@ export default function Navbar({ setQuery }) {
     search.set("priority", "baseSearch");
     search.set("page", "1");
     search.set("query", q);
+    search.delete("genres");
     url.search = search.toString();
     window.location.href = url.href;
   }
@@ -21,6 +23,7 @@ export default function Navbar({ setQuery }) {
     search.set("priority", option);
     search.set("page", "1");
     search.delete("query");
+    search.delete("genres");
     url.search = search.toString();
     window.location.href = url.href;
   }
@@ -61,7 +64,8 @@ export default function Navbar({ setQuery }) {
           </select>
         </div>
       </div>
-      <div className="top-left-container"></div>
+      <div className="genres">
+        <Genres genres={genres} /></div>
     </div>
   );
 }
