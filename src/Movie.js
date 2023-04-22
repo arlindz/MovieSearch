@@ -25,6 +25,7 @@ export default function Movie() {
   ];
 
   const [image, setImage] = useState("");
+  const [blurryImage, setBlurryImage] = useState("");
   const [reviewIndex, setReviewIndex] = useState(0);
   const genresURL =
     "https://api.themoviedb.org/3/genre/movie/list?api_key=00e98fcc934090f14015fd76e2cf801b";
@@ -76,11 +77,8 @@ export default function Movie() {
       reccomend: reccomendJson,
       genres: obj
     });
-    setImage(
-      "https://image.tmdb.org/t/p/w1280/" +
-      movieJson.poster_path +
-      "?api_key=00e98fcc934090f14015fd76e2cf801b"
-    );
+    setImage(imageURL(movieJson.poster_path, 1280));
+    setBlurryImage(imageURL(movieJson.poster_path, 200));
   }
 
   function displayDescription() {
@@ -97,7 +95,7 @@ export default function Movie() {
         : true;
   return (
     <div className="movie-all-container">
-      <img src={image} className="movie-background-image" alt="" />
+      <img src={blurryImage} className="movie-background-image" alt="" />
       <div style={styles[1]} className="movie-description-container">
         <p style={styles[2]} className="top-movie-description">
           {data.movieDetails.overview}

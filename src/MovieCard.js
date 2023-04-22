@@ -13,11 +13,24 @@ export default function MovieCard({ props, genres }) {
       ? props.vote_average.toFixed(1)
       : props.vote_average.toFixed(2) : "";
   let genreElements = []
+  function selectGenre(id) {
+    console.log(id);
+    console.log("...");
+    const url = new URL(window.location.href);
+    const search = url.searchParams;
+    search.set("priority", "discover");
+    search.set("page", "1");
+    search.set("genres", Number(id));
+    url.search = search.toString();
+    window.location.href = url.href;
+  }
   if (genreExists)
     genreElements = props.genre_ids.map((item) => {
       if (genres[item] !== undefined)
         return (
-          <div className="genre-box">
+          <div onClick={() => {
+            selectGenre(item);
+          }} name="name" className="genre-box">
             <p>{genres[item]}</p>
           </div>
         );

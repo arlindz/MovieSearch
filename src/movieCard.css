@@ -93,6 +93,7 @@
   height: 20px;
   border-radius: 5px;
   display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
   background-color: #cae962;
