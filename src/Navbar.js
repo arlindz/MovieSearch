@@ -4,8 +4,7 @@ import Genres from "./Genres";
 export default function Navbar({ genres }) {
   const query = useRef();
   function handleClick() {
-    const q =
-      query.current.value.length === 0 ? "" : "&query=" + query.current.value;
+    const q = query.current.value;
     const url = new URL(window.location.href);
     const search = url.searchParams;
     search.set("priority", "baseSearch");
